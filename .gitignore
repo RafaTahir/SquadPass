@@ -1,0 +1,15 @@
+# Anchor / Solana
+target/
+test-ledger/
+.anchor/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local

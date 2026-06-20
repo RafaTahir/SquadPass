@@ -1,0 +1,274 @@
+{
+  "address": "SqdP5rWKnBqEjY3HBHA9meEMEW7rGKgMFeeDNa6gqVh",
+  "metadata": {
+    "name": "squadpass",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "instructions": [
+    {
+      "name": "createSquad",
+      "discriminator": [29, 153, 23, 73, 163, 230, 172, 48],
+      "accounts": [
+        { "name": "organizer", "writable": true, "signer": true },
+        { "name": "squad", "writable": true },
+        { "name": "tokenMint" },
+        { "name": "vault", "writable": true },
+        { "name": "systemProgram", "address": "11111111111111111111111111111111" },
+        { "name": "tokenProgram", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" },
+        { "name": "associatedTokenProgram", "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL" },
+        { "name": "rent", "address": "SysvarRent111111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "squadId", "type": "u64" },
+        { "name": "country", "type": "string" },
+        { "name": "name", "type": "string" },
+        { "name": "subscriptionAmount", "type": "u64" },
+        { "name": "cadenceSeconds", "type": "i64" }
+      ]
+    },
+    {
+      "name": "joinSquad",
+      "discriminator": [206, 41, 26, 131, 96, 115, 165, 175],
+      "accounts": [
+        { "name": "subscriber", "writable": true, "signer": true },
+        { "name": "squad", "writable": true },
+        { "name": "subscription", "writable": true },
+        { "name": "leaderboardEntry", "writable": true },
+        { "name": "subscriberTokenAccount", "writable": true },
+        { "name": "vault", "writable": true },
+        { "name": "squadAuthority" },
+        { "name": "tokenProgram", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" },
+        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "maxChargeAmount", "type": "u64" }
+      ]
+    },
+    {
+      "name": "executeBilling",
+      "discriminator": [250, 204, 128, 41, 185, 175, 60, 188],
+      "accounts": [
+        { "name": "cranker", "signer": true },
+        { "name": "squad" },
+        { "name": "subscription", "writable": true },
+        { "name": "leaderboardEntry", "writable": true },
+        { "name": "subscriberTokenAccount", "writable": true },
+        { "name": "vault", "writable": true },
+        { "name": "squadAuthority" },
+        { "name": "tokenProgram", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" }
+      ],
+      "args": []
+    },
+    {
+      "name": "submitPrediction",
+      "discriminator": [225, 114, 165, 3, 42, 157, 7, 44],
+      "accounts": [
+        { "name": "subscriber", "writable": true, "signer": true },
+        { "name": "subscription" },
+        { "name": "matchResult" },
+        { "name": "prediction", "writable": true },
+        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "predictionType", "type": { "defined": { "name": "PredictionType" } } },
+        { "name": "homeScore", "type": "u8" },
+        { "name": "awayScore", "type": "u8" }
+      ]
+    },
+    {
+      "name": "postResult",
+      "discriminator": [175, 52, 124, 80, 225, 173, 18, 166],
+      "accounts": [
+        { "name": "authority", "writable": true, "signer": true },
+        { "name": "squad" },
+        { "name": "matchResult", "writable": true },
+        { "name": "systemProgram", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [
+        { "name": "matchId", "type": "u64" },
+        { "name": "homeTeam", "type": "string" },
+        { "name": "awayTeam", "type": "string" },
+        { "name": "kickoffTime", "type": "i64" },
+        { "name": "homeScore", "type": "u8" },
+        { "name": "awayScore", "type": "u8" },
+        { "name": "isFinal", "type": "bool" }
+      ]
+    },
+    {
+      "name": "settlePredictions",
+      "discriminator": [136, 182, 219, 87, 17, 4, 82, 205],
+      "accounts": [
+        { "name": "settler", "signer": true },
+        { "name": "matchResult" },
+        { "name": "prediction", "writable": true },
+        { "name": "leaderboardEntry", "writable": true }
+      ],
+      "args": []
+    },
+    {
+      "name": "cancelSubscription",
+      "discriminator": [117, 255, 195, 57, 32, 43, 171, 189],
+      "accounts": [
+        { "name": "subscriber", "writable": true, "signer": true },
+        { "name": "squad", "writable": true },
+        { "name": "subscription", "writable": true },
+        { "name": "subscriberTokenAccount", "writable": true },
+        { "name": "tokenProgram", "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Squad",
+      "discriminator": [82, 115, 117, 97, 100, 0, 0, 0]
+    },
+    {
+      "name": "Subscription",
+      "discriminator": [83, 117, 98, 115, 99, 114, 0, 0]
+    },
+    {
+      "name": "Prediction",
+      "discriminator": [80, 114, 101, 100, 105, 99, 116, 0]
+    },
+    {
+      "name": "MatchResult",
+      "discriminator": [77, 97, 116, 99, 104, 82, 101, 115]
+    },
+    {
+      "name": "LeaderboardEntry",
+      "discriminator": [76, 101, 97, 100, 101, 114, 98, 111]
+    }
+  ],
+  "errors": [
+    { "code": 6000, "name": "SquadNotActive", "msg": "Squad is not active" },
+    { "code": 6001, "name": "SubscriptionNotActive", "msg": "Subscription is not active" },
+    { "code": 6002, "name": "PaymentNotDue", "msg": "Payment not yet due" },
+    { "code": 6003, "name": "PredictionWindowClosed", "msg": "Prediction window closed" },
+    { "code": 6004, "name": "ResultNotFinal", "msg": "Match result not final" },
+    { "code": 6005, "name": "AlreadySettled", "msg": "Prediction already settled" },
+    { "code": 6006, "name": "Unauthorized", "msg": "Unauthorized" },
+    { "code": 6007, "name": "InsufficientAllowance", "msg": "Insufficient delegate allowance" },
+    { "code": 6008, "name": "CountryTooLong", "msg": "Country name too long (max 32 characters)" },
+    { "code": 6009, "name": "NameTooLong", "msg": "Squad name too long (max 64 characters)" },
+    { "code": 6010, "name": "InvalidPredictionType", "msg": "Invalid prediction type" },
+    { "code": 6011, "name": "AlreadyCancelled", "msg": "Subscription already cancelled" },
+    { "code": 6012, "name": "InvalidAmount", "msg": "Subscription amount must be greater than 0" },
+    { "code": 6013, "name": "InvalidCadence", "msg": "Billing cadence must be greater than 0" }
+  ],
+  "types": [
+    {
+      "name": "Squad",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "squadId", "type": "u64" },
+          { "name": "organizer", "type": "pubkey" },
+          { "name": "country", "type": "string" },
+          { "name": "name", "type": "string" },
+          { "name": "subscriptionAmount", "type": "u64" },
+          { "name": "tokenMint", "type": "pubkey" },
+          { "name": "cadenceSeconds", "type": "i64" },
+          { "name": "vault", "type": "pubkey" },
+          { "name": "isActive", "type": "bool" },
+          { "name": "memberCount", "type": "u32" },
+          { "name": "createdAt", "type": "i64" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "Subscription",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "subscriber", "type": "pubkey" },
+          { "name": "squad", "type": "pubkey" },
+          { "name": "nextDueAt", "type": "i64" },
+          { "name": "maxChargeAmount", "type": "u64" },
+          { "name": "billingInterval", "type": "i64" },
+          { "name": "status", "type": { "defined": { "name": "SubscriptionStatus" } } },
+          { "name": "totalPaid", "type": "u64" },
+          { "name": "lastPaidAt", "type": "i64" },
+          { "name": "createdAt", "type": "i64" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "Prediction",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "matchId", "type": "u64" },
+          { "name": "subscriber", "type": "pubkey" },
+          { "name": "squad", "type": "pubkey" },
+          { "name": "predictionType", "type": { "defined": { "name": "PredictionType" } } },
+          { "name": "homeScore", "type": "u8" },
+          { "name": "awayScore", "type": "u8" },
+          { "name": "submittedAt", "type": "i64" },
+          { "name": "isSettled", "type": "bool" },
+          { "name": "pointsAwarded", "type": "u16" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "MatchResult",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "matchId", "type": "u64" },
+          { "name": "homeTeam", "type": "string" },
+          { "name": "awayTeam", "type": "string" },
+          { "name": "kickoffTime", "type": "i64" },
+          { "name": "homeScore", "type": "u8" },
+          { "name": "awayScore", "type": "u8" },
+          { "name": "isFinal", "type": "bool" },
+          { "name": "resultAuthority", "type": "pubkey" },
+          { "name": "squad", "type": "pubkey" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "LeaderboardEntry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "subscriber", "type": "pubkey" },
+          { "name": "squad", "type": "pubkey" },
+          { "name": "totalPoints", "type": "u32" },
+          { "name": "matchesPredicted", "type": "u16" },
+          { "name": "correctWinners", "type": "u16" },
+          { "name": "correctScorelines", "type": "u16" },
+          { "name": "paidCycles", "type": "u16" },
+          { "name": "currentStreak", "type": "u16" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "SubscriptionStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          { "name": "Active" },
+          { "name": "Cancelled" },
+          { "name": "Paused" }
+        ]
+      }
+    },
+    {
+      "name": "PredictionType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          { "name": "Winner" },
+          { "name": "Scoreline" }
+        ]
+      }
+    }
+  ]
+}
